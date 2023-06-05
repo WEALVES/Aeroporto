@@ -49,7 +49,13 @@ public class Hangar extends ElementoAeroporto {
     }
 
     public void realizarManutencao(Aeronave aeronave) {
-
+        System.out.println("Realizando manutenção da aeronave " + aeronave.getNumeroIdentificacao());
+    }
+    
+    public void removerHangar(Hangar hangar) {
+//        Aeroporto aeroporto = new Aeroporto() {};
+//        List<Hangar> hangares = aeroporto.getHangares();
+//        hangares.remove(hangar);
     }
 }
 

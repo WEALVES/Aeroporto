@@ -9,10 +9,13 @@ package com.mycompany.aeroporto;
  * @author wellington
  */
 public class Aviao extends Aeronave {
+    
+    
     public Aviao(String numeroIdentificacao) {
         super(numeroIdentificacao, TipoAeronave.ASA_FIXA);
     }
 
+    // Implementação dos métodos abstratos da classe Aeronave
     @Override
     public void pousar() {
         System.out.println("Avião pousando...");

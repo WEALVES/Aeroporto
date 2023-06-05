@@ -50,11 +50,11 @@ public class TorreDeControle extends ElementoAeroporto {
     }
 
     public void solicitarProcedimentosPousoDecolagem(Aeronave aeronave) {
-        // Lógica para solicitar procedimentos de pouso/decolagem
+
     }
 
     public void obterInformacoesRadar() {
-        // Lógica para obter informações do radar
+
     }
     
     

@@ -9,15 +9,19 @@ package com.mycompany.aeroporto;
  * @author wellington
  */
 public class Helicoptero extends Aeronave {
+    
+    public Helicoptero(String numeroIdentificacao) {
+        super(numeroIdentificacao, TipoAeronave.HELICOPTERO);
+    }
     // Implementação dos métodos abstratos da classe Aeronave
     @Override
     public void pousar() {
-        // Lógica para o helicóptero pousar
+        System.out.println("Helicoptero pousando...");
     }
 
     @Override
     public void decolar() {
-        // Lógica para o helicóptero decolar
+        System.out.println("Helicoptero decolando...");
     }
 
     @Override

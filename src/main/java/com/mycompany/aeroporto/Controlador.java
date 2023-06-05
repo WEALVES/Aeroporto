@@ -38,7 +38,7 @@ import java.util.List;
         this.aeronavesAutorizadas = aeronavesAutorizadas;
     }
 
-    // Outros métodos
+    //  métodos
     public void autorizarDecolagem(Aeronave aeronave) {
         aeronavesAutorizadas.add(aeronave);
     }

@@ -1,0 +1,649 @@
+package com.mycompany.aeroporto;
+
+/**
+ *
+ * @author wellington
+ */
+    public abstract class ElementoAeroporto {
+    private String numeroIdentificacao;
+    private String nome;
+    private Aeroporto aeroportoAssociado;
+
+    public ElementoAeroporto(String numeroIdentificacao) {
+        this.numeroIdentificacao = numeroIdentificacao;
+    }
+
+    // Getters e Setters
+
+    public String getNumeroIdentificacao() {
+        return numeroIdentificacao;
+    }
+
+    public void setNumeroIdentificacao(String numeroIdentificacao) {
+        this.numeroIdentificacao = numeroIdentificacao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Aeroporto getAeroportoAssociado() {
+        return aeroportoAssociado;
+    }
+
+    public void setAeroportoAssociado(Aeroporto aeroportoAssociado) {
+        this.aeroportoAssociado = aeroportoAssociado;
+    }
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+    public class Controlador {
+    private String nome;
+    private List<Aeronave> aeronavesAutorizadas;
+
+    public Controlador(String nome) {
+        this.nome = nome;
+        this.aeronavesAutorizadas = new ArrayList<>();
+    }
+
+    // Getters e Setters
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Aeronave> getAeronavesAutorizadas() {
+        return aeronavesAutorizadas;
+    }
+
+    public void setAeronavesAutorizadas(List<Aeronave> aeronavesAutorizadas) {
+        this.aeronavesAutorizadas = aeronavesAutorizadas;
+    }
+
+    //  métodos
+    public void autorizarDecolagem(Aeronave aeronave) {
+        aeronavesAutorizadas.add(aeronave);
+    }
+
+    public void cancelarDecolagem(Aeronave aeronave) {
+        aeronavesAutorizadas.remove(aeronave);
+    }
+
+    public void autorizarPouso(Aeronave aeronave) {
+        aeronavesAutorizadas.add(aeronave);
+    }
+
+    public void cancelarPouso(Aeronave aeronave) {
+        aeronavesAutorizadas.remove(aeronave);
+    }
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+public abstract class Aeroporto extends ElementoAeroporto {
+    private List<Pista> pistas;
+    private List<Terminal> terminais;
+    private List<Hangar> hangares;
+    private TorreDeControle torreDeControle;
+
+    public Aeroporto(String numeroIdentificacao) {
+        super(numeroIdentificacao);
+        this.pistas = new ArrayList<>();
+        this.terminais = new ArrayList<>();
+        this.hangares = new ArrayList<>();
+        this.torreDeControle = new TorreDeControle();
+    }
+
+    // Getters e Setters
+
+    public List<Pista> getPistas() {
+        return pistas;
+    }
+
+    public void setPistas(List<Pista> pistas) {
+        this.pistas = pistas;
+    }
+
+    public List<Terminal> getTerminais() {
+        return terminais;
+    }
+
+    public void setTerminais(List<Terminal> terminais) {
+        this.terminais = terminais;
+    }
+
+    public List<Hangar> getHangares() {
+        return hangares;
+    }
+
+    public void setHangares(List<Hangar> hangares) {
+        this.hangares = hangares;
+    }
+
+    public TorreDeControle getTorreDeControle() {
+        return torreDeControle;
+    }
+
+    public void setTorreDeControle(TorreDeControle torreDeControle) {
+        this.torreDeControle = torreDeControle;
+    }
+
+    public abstract void adicionarPista(Pista pista);
+    public abstract void removerPista(Pista pista);
+    public abstract void adicionarTerminal(Terminal terminal);
+    public abstract void removerTerminal(Terminal terminal);
+    public abstract void adicionarHangar(Hangar hangar);
+    public abstract void removerHangar(Hangar hangar);
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+    public abstract class Aeronave {
+    private String numeroIdentificacao;
+    private TipoAeronave tipoAeronave;
+    private List<Piloto> pilotos;
+    private int combustivel;
+    
+    
+
+    public Aeronave(String numeroIdentificacao, TipoAeronave tipoAeronave) {
+        this.numeroIdentificacao = numeroIdentificacao;
+        this.tipoAeronave = tipoAeronave;
+        this.pilotos = new ArrayList<>();
+    }
+
+    // Getters e Setters
+
+    public String getNumeroIdentificacao() {
+        return numeroIdentificacao;
+    }
+
+    public void setNumeroIdentificacao(String numeroIdentificacao) {
+        this.numeroIdentificacao = numeroIdentificacao;
+    }
+
+    public TipoAeronave getTipoAeronave() {
+        return tipoAeronave;
+    }
+
+    public void setTipoAeronave(TipoAeronave tipoAeronave) {
+        this.tipoAeronave = tipoAeronave;
+    }
+
+    public List<Piloto> getPilotos() {
+        return pilotos;
+    }
+
+    public void setPilotos(List<Piloto> pilotos) {
+        this.pilotos = pilotos;
+    }
+
+    public int getCombustivel() {
+        return combustivel;
+    }
+
+    public void setCombustivel(int combustivel) {
+        this.combustivel = combustivel;
+    }
+    
+    // Enumerador TipoAeronave
+    public enum TipoAeronave {
+    ASA_FIXA,
+    HELICOPTERO
+                }
+
+    // Métodos 
+    public abstract void pousar();
+    public abstract void decolar();
+    public abstract void solicitarInformacoesTorreControle();
+    
+    public void solicitarInformacoesTorreControle(TorreDeControle torreDeControle) {
+        torreDeControle.obterInformacoesRadar();
+                                                    }
+    
+  
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+public class TorreDeControle extends ElementoAeroporto {
+    
+    private List<Controlador> controladores;
+    private Radar radar;
+
+    public TorreDeControle() {
+        super("Torre");
+        this.controladores = new ArrayList<>();
+        this.radar = new Radar();
+    }
+
+    // Getters e Setters
+
+    public List<Controlador> getControladores() {
+        return controladores;
+    }
+
+    public void setControladores(List<Controlador> controladores) {
+        this.controladores = controladores;
+    }
+
+    public Radar getRadar() {
+        return radar;
+    }
+
+    public void setRadar(Radar radar) {
+        this.radar = radar;
+    }
+
+    // Outros métodos
+    public void adicionarControlador(Controlador controlador) {
+        controladores.add(controlador);
+    }
+
+    public void removerControlador(Controlador controlador) {
+        controladores.remove(controlador);
+    }
+
+    public void solicitarProcedimentosPousoDecolagem(Aeronave aeronave) {
+
+    }
+
+    public void obterInformacoesRadar() {
+
+    }
+    
+    
+}
+
+package com.mycompany.aeroporto;
+
+/**
+ *
+ * @author wellington
+ */
+public class Voo {
+    private String numeroIdentificacao;
+    private Aeroporto aeroportoOrigem;
+    private Aeroporto aeroportoDestino;
+    private StatusVoo status;
+
+    public Voo(String numeroIdentificacao, Aeroporto aeroportoOrigem, Aeroporto aeroportoDestino) {
+        this.numeroIdentificacao = numeroIdentificacao;
+        this.aeroportoOrigem = aeroportoOrigem;
+        this.aeroportoDestino = aeroportoDestino;
+        this.status = StatusVoo.PENDENTE;
+    }
+
+    // Getters e Setters
+
+    public String getNumeroIdentificacao() {
+        return numeroIdentificacao;
+    }
+
+    public void setNumeroIdentificacao(String numeroIdentificacao) {
+        this.numeroIdentificacao = numeroIdentificacao;
+    }
+
+    public Aeroporto getAeroportoOrigem() {
+        return aeroportoOrigem;
+    }
+
+    public void setAeroportoOrigem(Aeroporto aeroportoOrigem) {
+        this.aeroportoOrigem = aeroportoOrigem;
+    }
+
+    public Aeroporto getAeroportoDestino() {
+        return aeroportoDestino;
+    }
+
+    public void setAeroportoDestino(Aeroporto aeroportoDestino) {
+        this.aeroportoDestino = aeroportoDestino;
+    }
+
+    public StatusVoo getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusVoo status) {
+        this.status = status;
+    }
+    
+    // Enumerador EstadoPista
+    public enum EstadoPista {
+    DISPONIVEL,
+    OCUPADA,
+    EM_MANUTENCAO
+}
+    
+    // Enumerador StatusVoo
+    public enum StatusVoo {
+    PENDENTE,
+    APROVADO,
+    CANCELADO,
+    CONCLUIDO
+}
+}
+
+package com.mycompany.aeroporto;
+
+import com.mycompany.aeroporto.Voo.EstadoPista;
+
+/**
+ *
+ * @author wellington
+ */
+public class Pista extends ElementoAeroporto {
+    private EstadoPista estado;
+    private int comprimento;
+
+    public Pista(String numeroIdentificacao, int comprimento) {
+        super(numeroIdentificacao);
+        this.comprimento = comprimento;
+    }
+
+    // Getters e Setters
+
+    public EstadoPista getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPista estado) {
+        this.estado = estado;
+    }
+
+    public int getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(int comprimento) {
+        this.comprimento = comprimento;
+    }
+
+    // Outros métodos
+    public void alterarEstadoPista(EstadoPista estado) {
+        this.estado = estado;
+    }
+
+    public boolean verificarDisponibilidade() {
+        return estado == EstadoPista.DISPONIVEL;
+    }
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+public class Terminal extends ElementoAeroporto {
+    private int capacidade;
+    private List<Voo> voos;
+
+    public Terminal(String numeroIdentificacao, int capacidade) {
+        super(numeroIdentificacao);
+        this.capacidade = capacidade;
+        this.voos = new ArrayList<>();
+    }
+
+    // Getters e Setters
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public List<Voo> getVoos() {
+        return voos;
+    }
+
+    public void setVoos(List<Voo> voos) {
+        this.voos = voos;
+    }
+
+    //  métodos
+    public void adicionarVoo(Voo voo) {
+        voos.add(voo);
+    }
+
+    public void removerVoo(Voo voo) {
+        voos.remove(voo);
+    }
+
+    public void embarcarPassageiros() {
+    }
+
+    public void desembarcarPassageiros() {
+    }
+    
+    public void removerTerminal(Terminal terminal) {
+    //        Aeroporto aeroporto = new Aeroporto(); // Crie uma instância de Aeroporto, se necessário
+    //        List<Terminal> terminais = aeroporto.getTerminais();
+    //        terminais.remove(terminal);
+    }
+
+    public String obterInformacoesRadar() {
+    return "Informações do radar";
+    }
+
+    public void solicitarProcedimentosPousoDecolagem(Aeronave aeronave) {
+    System.out.println("Solicitando procedimentos de pouso/decolagem para a aeronave " + aeronave.getNumeroIdentificacao());
+    }
+        }
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+public class Hangar extends ElementoAeroporto {
+    private int capacidade;
+    private List<Aeronave> aeronavesEstacionadas;
+
+    public Hangar(String numeroIdentificacao, int capacidade) {
+        super(numeroIdentificacao);
+        this.capacidade = capacidade;
+        this.aeronavesEstacionadas = new ArrayList<>();
+    }
+
+    // Getters e Setters
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public List<Aeronave> getAeronavesEstacionadas() {
+        return aeronavesEstacionadas;
+    }
+
+    public void setAeronavesEstacionadas(List<Aeronave> aeronavesEstacionadas) {
+        this.aeronavesEstacionadas = aeronavesEstacionadas;
+    }
+
+    //  métodos
+    public void adicionarAeronave(Aeronave aeronave) {
+        aeronavesEstacionadas.add(aeronave);
+    }
+
+    public void removerAeronave(Aeronave aeronave) {
+        aeronavesEstacionadas.remove(aeronave);
+    }
+
+    public void realizarManutencao(Aeronave aeronave) {
+        System.out.println("Realizando manutenção da aeronave " + aeronave.getNumeroIdentificacao());
+    }
+    
+    public void removerHangar(Hangar hangar) {
+//        Aeroporto aeroporto = new Aeroporto() {};
+//        List<Hangar> hangares = aeroporto.getHangares();
+//        hangares.remove(hangar);
+    }
+}
+
+package com.mycompany.aeroporto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author wellington
+ */
+public class Radar {
+    private List<Aeronave> aeronavesDetectadas;
+
+    public Radar() {
+        this.aeronavesDetectadas = new ArrayList<>();
+    }
+
+    // Getters e Setters
+
+    public List<Aeronave> getAeronavesDetectadas() {
+        return aeronavesDetectadas;
+    }
+
+    public void setAeronavesDetectadas(List<Aeronave> aeronavesDetectadas) {
+        this.aeronavesDetectadas = aeronavesDetectadas;
+    }
+
+    //  métodos
+    public void adicionarAeronave(Aeronave aeronave) {
+        aeronavesDetectadas.add(aeronave);
+    }
+
+    public void removerAeronave(Aeronave aeronave) {
+        aeronavesDetectadas.remove(aeronave);
+    }
+}
+
+package com.mycompany.aeroporto;
+
+/**
+ *
+ * @author wellington
+ */
+public class Piloto {
+    private String nome;
+
+    public Piloto(String nome, String brevete) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+
+}
+
+package com.mycompany.aeroporto;
+
+/**
+ *
+ * @author wellington
+ */
+public class Aviao extends Aeronave {
+    
+    
+    public Aviao(String numeroIdentificacao) {
+        super(numeroIdentificacao, TipoAeronave.ASA_FIXA);
+    }
+
+    // Implementação dos métodos abstratos da classe Aeronave
+    @Override
+    public void pousar() {
+        System.out.println("Avião pousando...");
+    }
+
+    @Override
+    public void decolar() {
+        System.out.println("Avião decolando...");
+    }
+
+
+    @Override
+    public void solicitarInformacoesTorreControle() {
+    }
+}
+
+package com.mycompany.aeroporto;
+
+/**
+ *
+ * @author wellington
+ */
+public class Helicoptero extends Aeronave {
+    
+    public Helicoptero(String numeroIdentificacao) {
+        super(numeroIdentificacao, TipoAeronave.HELICOPTERO);
+    }
+    // Implementação dos métodos abstratos da classe Aeronave
+    @Override
+    public void pousar() {
+        System.out.println("Helicoptero pousando...");
+    }
+
+    @Override
+    public void decolar() {
+        System.out.println("Helicoptero decolando...");
+    }
+
+    @Override
+    public void solicitarInformacoesTorreControle() {
+        // Lógica para o helicóptero solicitar informações à torre de controle
+    }
+}

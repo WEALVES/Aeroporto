@@ -53,4 +53,18 @@ public class Terminal extends ElementoAeroporto {
 
     public void desembarcarPassageiros() {
     }
-}
+    
+    public void removerTerminal(Terminal terminal) {
+    //        Aeroporto aeroporto = new Aeroporto(); // Crie uma instância de Aeroporto, se necessário
+    //        List<Terminal> terminais = aeroporto.getTerminais();
+    //        terminais.remove(terminal);
+    }
+
+    public String obterInformacoesRadar() {
+    return "Informações do radar";
+    }
+
+    public void solicitarProcedimentosPousoDecolagem(Aeronave aeronave) {
+    System.out.println("Solicitando procedimentos de pouso/decolagem para a aeronave " + aeronave.getNumeroIdentificacao());
+    }
+        }
