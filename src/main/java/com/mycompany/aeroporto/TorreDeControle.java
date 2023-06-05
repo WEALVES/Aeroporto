@@ -4,10 +4,58 @@
  */
 package com.mycompany.aeroporto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
- * @author welli
+ * @author wellington
  */
-public class TorreDeControle {
+public class TorreDeControle extends ElementoAeroporto {
+    
+    private List<Controlador> controladores;
+    private Radar radar;
+
+    public TorreDeControle() {
+        super("Torre");
+        this.controladores = new ArrayList<>();
+        this.radar = new Radar();
+    }
+
+    // Getters e Setters
+
+    public List<Controlador> getControladores() {
+        return controladores;
+    }
+
+    public void setControladores(List<Controlador> controladores) {
+        this.controladores = controladores;
+    }
+
+    public Radar getRadar() {
+        return radar;
+    }
+
+    public void setRadar(Radar radar) {
+        this.radar = radar;
+    }
+
+    // Outros métodos
+    public void adicionarControlador(Controlador controlador) {
+        controladores.add(controlador);
+    }
+
+    public void removerControlador(Controlador controlador) {
+        controladores.remove(controlador);
+    }
+
+    public void solicitarProcedimentosPousoDecolagem(Aeronave aeronave) {
+        // Lógica para solicitar procedimentos de pouso/decolagem
+    }
+
+    public void obterInformacoesRadar() {
+        // Lógica para obter informações do radar
+    }
+    
     
 }

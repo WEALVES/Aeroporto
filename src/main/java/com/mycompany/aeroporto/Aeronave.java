@@ -16,6 +16,8 @@ import java.util.List;
     private TipoAeronave tipoAeronave;
     private List<Piloto> pilotos;
     private int combustivel;
+    
+    
 
     public Aeronave(String numeroIdentificacao, TipoAeronave tipoAeronave) {
         this.numeroIdentificacao = numeroIdentificacao;
@@ -61,10 +63,15 @@ import java.util.List;
     public enum TipoAeronave {
     ASA_FIXA,
     HELICOPTERO
-}
+                }
 
-    // Métodos abstratos
+    // Métodos 
     public abstract void pousar();
     public abstract void decolar();
     public abstract void solicitarInformacoesTorreControle();
+    
+    public void solicitarInformacoesTorreControle(TorreDeControle torreDeControle) {
+        torreDeControle.obterInformacoesRadar();
+                                                    }
+    
 }
